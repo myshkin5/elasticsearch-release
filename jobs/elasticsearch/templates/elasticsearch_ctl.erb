@@ -24,6 +24,7 @@ case $1 in
 
     exec chpst -u vcap:vcap $PACKAGE_DIR/bin/elasticsearch \
       -p $PIDFILE\
+      -Dpath.conf=/var/vcap/jobs/elasticsearch/config \
       -Dpath.data=$PERSISTENT_STORE/data \
       -Dpath.logs=$LOG_DIR \
       -Dpath.plugins=$PERSISTENT_STORE/plugins \

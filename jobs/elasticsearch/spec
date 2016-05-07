@@ -4,6 +4,7 @@ name: elasticsearch
 templates:
   elasticsearch_ctl.erb: bin/elasticsearch_ctl
   pid_utils.sh: bin/pid_utils.sh
+  elasticsearch.yml: config/elasticsearch.yml
 
 packages:
 - elasticsearch
