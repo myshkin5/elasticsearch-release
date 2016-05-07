@@ -1,0 +1,7 @@
+---
+name: elasticsearch
+
+dependencies: []
+
+files:
+- elasticsearch/*

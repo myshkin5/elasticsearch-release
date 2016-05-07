@@ -1,0 +1,45 @@
+#!/bin/bash
+
+set -e -u -x
+
+RUN_DIR=/var/vcap/sys/run/elasticsearch
+LOG_DIR=/var/vcap/sys/log/elasticsearch
+PACKAGE_DIR=/var/vcap/packages/elasticsearch
+PIDFILE=$RUN_DIR/pid
+
+source $(dirname $0)/pid_utils.sh
+
+case $1 in
+
+  start)
+    mkdir -p $RUN_DIR $LOG_DIR
+    chown -R vcap:vcap $RUN_DIR $LOG_DIR
+
+    pid_guard $PIDFILE "elasticsearch"
+
+    export JAVA_HOME=/var/vcap/packages/java
+    PERSISTENT_STORE=/var/vcap/store/elasticsearch
+    mkdir -p $PERSISTENT_STORE
+    chown vcap:vcap $PERSISTENT_STORE
+
+    exec chpst -u vcap:vcap $PACKAGE_DIR/bin/elasticsearch \
+      -p $PIDFILE\
+      -Dpath.data=$PERSISTENT_STORE/data \
+      -Dpath.logs=$LOG_DIR \
+      -Dpath.plugins=$PERSISTENT_STORE/plugins \
+      -Dpath.scripts=$PERSISTENT_STORE/scripts \
+      &>> $LOG_DIR/elasticsearch_stdout.log &
+
+    ;;
+
+  stop)
+    kill_and_wait $PIDFILE
+
+    ;;
+
+  *)
+    echo "Usage: $0 {start|stop}"
+
+    ;;
+
+esac

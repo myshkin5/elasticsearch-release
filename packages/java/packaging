@@ -1,0 +1,7 @@
+# abort script on any command that exits with a non zero value
+set -e
+
+cd java
+tar xzf openjdk*.tar.gz
+chmod -R go+r .
+cp -R * ${BOSH_INSTALL_TARGET}

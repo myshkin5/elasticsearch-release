@@ -1,0 +1,47 @@
+---
+name: elasticsearch
+director_uuid: PLACEHOLDER-DIRECTOR-UUID
+
+releases:
+- name: elasticsearch
+  version: latest
+
+networks:
+- name: elasticsearch_z1
+  subnets:
+  - cloud_properties: {}
+    range: 10.244.61.0/24
+    gateway: 10.244.61.1
+    static:
+    - 10.244.61.2 - 10.244.61.10
+
+resource_pools:
+- name: default_z1
+  network: elasticsearch_z1
+  stemcell:
+    name: bosh-warden-boshlite-ubuntu-trusty-go_agent
+    version: latest
+
+compilation:
+  workers: 1
+  network: elasticsearch_z1
+  reuse_compilation_vms: true
+
+update:
+  canaries: 1
+  max_in_flight: 2
+  canary_watch_time: 15000-100000
+  update_watch_time: 15000-300000
+
+jobs:
+- name: elasticsearch_z1
+  instances: 1
+  resource_pool: default_z1
+  persistent_disk: 1024
+  networks:
+  - name: elasticsearch_z1
+    static_ips:
+    - 10.244.61.5
+  templates:
+  - name: elasticsearch
+    release: elasticsearch

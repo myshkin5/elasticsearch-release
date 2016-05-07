@@ -1,0 +1,6 @@
+---
+blobstore:
+  provider: s3
+  options:
+    bucket_name: elasticsearch-blobs
+final_name: elasticsearch
