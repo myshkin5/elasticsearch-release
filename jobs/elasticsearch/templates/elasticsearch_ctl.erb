@@ -17,18 +17,19 @@ case $1 in
 
     pid_guard $PIDFILE "elasticsearch"
 
+    sysctl -w vm.max_map_count=262144
+
     export JAVA_HOME=/var/vcap/packages/java
     PERSISTENT_STORE=/var/vcap/store/elasticsearch
     mkdir -p $PERSISTENT_STORE
     chown vcap:vcap $PERSISTENT_STORE
 
     exec chpst -u vcap:vcap $PACKAGE_DIR/bin/elasticsearch \
-      -p $PIDFILE\
-      -Dpath.conf=/var/vcap/jobs/elasticsearch/config \
-      -Dpath.data=$PERSISTENT_STORE/data \
-      -Dpath.logs=$LOG_DIR \
-      -Dpath.plugins=$PERSISTENT_STORE/plugins \
-      -Dpath.scripts=$PERSISTENT_STORE/scripts \
+      --pidfile $PIDFILE\
+      -Epath.conf=/var/vcap/jobs/elasticsearch/config \
+      -Epath.data=$PERSISTENT_STORE/data \
+      -Epath.logs=$LOG_DIR \
+      -Epath.scripts=$PERSISTENT_STORE/scripts \
       &>> $LOG_DIR/elasticsearch_stdout.log &
 
     ;;

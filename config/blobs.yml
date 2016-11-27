@@ -1,9 +1,9 @@
 ---
-elasticsearch/elasticsearch-2.3.2.tar.gz:
-  object_id: c2cc2f98-93e7-44a7-b3b5-8658ba6d396d
-  sha: f94461a7bd88a46f3a30f971339122341ba20c65
-  size: 27543334
-java/openjdk-1.8.0_91-x86_64-trusty.tar.gz:
-  object_id: 5c6bfe36-8966-4148-adb3-f7b20e21318f
-  sha: 69c612c7f783aad33f4d73ec9b44e1a2ee50f386
-  size: 78278698
+elasticsearch/elasticsearch-5.0.1.tar.gz:
+  object_id: 64cc55c1-9cdf-4dbf-84ea-f616fd8bd388
+  sha: 3dd927d3bf901a3c1fa4e52bc7db62fe4b1c2b9a
+  size: 32944777
+java/openjdk-1.8.0_101-x86_64-trusty.tar.gz:
+  object_id: 489ffb89-dd4e-4083-9f2a-a83183858bea
+  sha: d77ee059e289ae52fb87812f1a2932268427dc26
+  size: 77696717
