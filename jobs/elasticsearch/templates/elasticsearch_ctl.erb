@@ -30,6 +30,7 @@ case $1 in
       -Epath.data=$PERSISTENT_STORE/data \
       -Epath.logs=$LOG_DIR \
       -Epath.scripts=$PERSISTENT_STORE/scripts \
+      -Enetwork.host=10.244.61.5 \
       &>> $LOG_DIR/elasticsearch_stdout.log &
 
     ;;

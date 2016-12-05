@@ -1,5 +1,7 @@
 # elasticsearch-release
 
+Most of these notes are reminders for the internal maintenance of this repository.
+
 ## Updating
 
 ### Updating the JRE
@@ -43,15 +45,16 @@
 
 ## Create a new release
 1. `bosh create release --force --with-tarball`
+2. Update the version below in the [Deploying](#deploying) section (in anticipation of the final release)
 
 ## Create a final release
 1. `bosh create release --final --with-tarball`
 2. Commit the changes from the previous step
-3. Create a release on github and upload the tarball to the release
+3. Draft a new release on github and upload the tarball to the release (on the same dialog)
 
 ## Deploying
 
-1. `bosh upload release https://github.com/myshkin5/elasticsearch-release/releases/download/2/elasticsearch-2.tgz`
+1. `bosh upload release https://github.com/myshkin5/elasticsearch-release/releases/download/4/elasticsearch-4.tgz`
 2. `curl --output elastic-search-bosh-lite.yml https://raw.githubusercontent.com/myshkin5/elasticsearch-release/master/templates/bosh-lite.yml`
 3. Edit manifest and replace `PLACEHOLDER-DIRECTOR-UUID` with bosh-lite director UUID (from `bosh status --uuid`).
 4. `bosh -d elastic-search-bosh-lite.yml deploy`
